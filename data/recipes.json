@@ -1,0 +1,752 @@
+[
+  {
+    "id": "1",
+    "title": "Grilled Chicken Tacos with Corn Tortillas",
+    "cuisine": "Mexican",
+    "mealType": "lunch",
+    "timeMinutes": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": 1.5, "unit": "lb" },
+      { "name": "corn tortillas", "quantity": 8 },
+      { "name": "lime juice", "quantity": 2, "unit": "tbsp" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "cilantro", "optional": false },
+      { "name": "onion", "quantity": 1 },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Season chicken with lime, oil, salt, and pepper",
+      "Grill chicken for 6-7 minutes per side",
+      "Rest for 5 minutes, then slice",
+      "Warm tortillas on grill",
+      "Assemble tacos with chicken, onion, and cilantro"
+    ],
+    "tags": ["gluten-free", "easy", "weeknight"]
+  },
+  {
+    "id": "2",
+    "title": "Classic Spaghetti Carbonara",
+    "cuisine": "Italian",
+    "mealType": "dinner",
+    "timeMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "pasta", "quantity": 1, "unit": "lb" },
+      { "name": "bacon", "quantity": 6, "unit": "oz" },
+      { "name": "eggs", "quantity": 4 },
+      { "name": "parmesan cheese", "quantity": 2, "unit": "cup" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Cook pasta until al dente",
+      "Fry bacon until crispy, chop it",
+      "Whisk eggs with parmesan",
+      "Toss hot pasta with bacon, then egg mixture",
+      "Season with salt and pepper"
+    ],
+    "tags": ["easy", "quick"]
+  },
+  {
+    "id": "3",
+    "title": "Quinoa Buddha Bowl",
+    "cuisine": "Fusion",
+    "mealType": "lunch",
+    "timeMinutes": 30,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "quinoa", "quantity": 1, "unit": "cup" },
+      { "name": "chickpeas", "quantity": 1, "unit": "can" },
+      { "name": "spinach", "quantity": 2, "unit": "cup" },
+      { "name": "carrot", "quantity": 1 },
+      { "name": "cucumber", "quantity": 1 },
+      { "name": "olive oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "lemon juice", "quantity": 2, "unit": "tbsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Cook quinoa according to package directions",
+      "Roast chickpeas with olive oil and salt at 400F for 20 mins",
+      "Chop veggies and combine in bowl",
+      "Add quinoa and chickpeas",
+      "Drizzle with lemon oil dressing"
+    ],
+    "tags": ["gluten-free", "vegetarian", "healthy"]
+  },
+  {
+    "id": "4",
+    "title": "Beef Stir Fry",
+    "cuisine": "Asian",
+    "mealType": "dinner",
+    "timeMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "beef sirloin", "quantity": 1, "unit": "lb" },
+      { "name": "broccoli", "quantity": 4, "unit": "cup" },
+      { "name": "tamari sauce", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 3, "unit": "clove" },
+      { "name": "ginger", "quantity": 1, "unit": "tbsp" },
+      { "name": "vegetable oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "sesame oil", "quantity": 1, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Slice beef thinly and cook in hot oil until browned",
+      "Set beef aside",
+      "Stir fry broccoli, garlic, and ginger for 3-4 mins",
+      "Return beef, add tamari and sesame oil",
+      "Cook 1-2 minutes until heated through"
+    ],
+    "tags": ["gluten-free", "weeknight", "quick"]
+  },
+  {
+    "id": "5",
+    "title": "Vegetable Soup",
+    "cuisine": "American",
+    "mealType": "lunch",
+    "timeMinutes": 40,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "chicken broth", "quantity": 6, "unit": "cup" },
+      { "name": "carrot", "quantity": 3 },
+      { "name": "celery", "quantity": 2 },
+      { "name": "onion", "quantity": 1 },
+      { "name": "zucchini", "quantity": 1 },
+      { "name": "tomato", "quantity": 2 },
+      { "name": "olive oil", "quantity": 1, "unit": "tbsp" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Heat oil and sauté onion, carrot, and celery",
+      "Add broth and bring to boil",
+      "Add remaining vegetables",
+      "Simmer for 20-25 minutes until tender",
+      "Season to taste"
+    ],
+    "tags": ["gluten-free", "vegetarian-friendly", "healthy"]
+  },
+  {
+    "id": "6",
+    "title": "Scrambled Eggs with Toast",
+    "cuisine": "American",
+    "mealType": "breakfast",
+    "timeMinutes": 10,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "eggs", "quantity": 3 },
+      { "name": "bread", "quantity": 2, "unit": "slice" },
+      { "name": "butter", "quantity": 1, "unit": "tbsp" },
+      { "name": "milk", "quantity": 2, "unit": "tbsp" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Toast bread",
+      "Whisk eggs with milk, salt, and pepper",
+      "Melt butter in skillet over medium heat",
+      "Pour eggs in and stir gently until cooked",
+      "Serve with toast"
+    ],
+    "tags": ["easy", "quick"]
+  },
+  {
+    "id": "7",
+    "title": "Rice and Black Beans",
+    "cuisine": "Latin",
+    "mealType": "lunch",
+    "timeMinutes": 35,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "white rice", "quantity": 1, "unit": "cup" },
+      { "name": "black beans", "quantity": 1, "unit": "can" },
+      { "name": "onion", "quantity": 1 },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "vegetable oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "cumin", "quantity": 1, "unit": "tsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Cook rice according to package directions",
+      "Heat oil and sauté onion and garlic",
+      "Add beans and cumin, heat through",
+      "Combine rice and beans",
+      "Season with salt"
+    ],
+    "tags": ["gluten-free", "vegetarian", "budget-friendly"]
+  },
+  {
+    "id": "8",
+    "title": "Grilled Salmon with Broccoli",
+    "cuisine": "American",
+    "mealType": "dinner",
+    "timeMinutes": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "salmon fillet", "quantity": 1.5, "unit": "lb" },
+      { "name": "broccoli", "quantity": 4, "unit": "cup" },
+      { "name": "lemon", "quantity": 1 },
+      { "name": "olive oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Preheat grill to medium-high",
+      "Season salmon with salt, pepper, and minced garlic",
+      "Grill salmon for 5-6 minutes per side",
+      "Meanwhile, toss broccoli with oil and roast",
+      "Serve with lemon wedges"
+    ],
+    "tags": ["gluten-free", "healthy", "weeknight"]
+  },
+  {
+    "id": "9",
+    "title": "Homemade Pizza",
+    "cuisine": "Italian",
+    "mealType": "dinner",
+    "timeMinutes": 45,
+    "difficulty": "medium",
+    "ingredients": [
+      { "name": "pizza dough", "quantity": 1 },
+      { "name": "tomato sauce", "quantity": 1, "unit": "cup" },
+      { "name": "mozzarella cheese", "quantity": 1.5, "unit": "cup" },
+      { "name": "pepperoni", "quantity": 3, "unit": "oz" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "basil", "optional": true }
+    ],
+    "instructions": [
+      "Preheat oven to 475F",
+      "Stretch dough on oiled pan",
+      "Spread tomato sauce",
+      "Add cheese and pepperoni",
+      "Bake for 12-15 minutes until crust is golden"
+    ],
+    "tags": ["easy-weekend"]
+  },
+  {
+    "id": "10",
+    "title": "Baked Sweet Potato",
+    "cuisine": "American",
+    "mealType": "lunch",
+    "timeMinutes": 50,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "sweet potato", "quantity": 2 },
+      { "name": "butter", "quantity": 2, "unit": "tbsp" },
+      { "name": "cinnamon", "quantity": 0.5, "unit": "tsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Preheat oven to 400F",
+      "Prick potatoes with fork",
+      "Bake for 40-45 minutes until tender",
+      "Cut open and add butter and cinnamon",
+      "Serve immediately"
+    ],
+    "tags": ["gluten-free", "vegetarian", "easy"]
+  },
+  {
+    "id": "11",
+    "title": "Chicken Soup",
+    "cuisine": "American",
+    "mealType": "lunch",
+    "timeMinutes": 45,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": 1, "unit": "lb" },
+      { "name": "chicken broth", "quantity": 6, "unit": "cup" },
+      { "name": "carrot", "quantity": 2 },
+      { "name": "celery", "quantity": 2 },
+      { "name": "onion", "quantity": 1 },
+      { "name": "egg noodle", "quantity": 2, "unit": "cup" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Bring broth to boil with chicken",
+      "Simmer chicken for 15-20 minutes",
+      "Remove and shred chicken",
+      "Add veggies and noodles",
+      "Simmer until tender, season to taste"
+    ],
+    "tags": ["comfort-food"]
+  },
+  {
+    "id": "12",
+    "title": "Gluten-Free Pasta with Marinara",
+    "cuisine": "Italian",
+    "mealType": "dinner",
+    "timeMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "gluten free pasta", "quantity": 1, "unit": "lb" },
+      { "name": "marinara sauce", "quantity": 2.5, "unit": "cup" },
+      { "name": "parmesan cheese", "quantity": 0.5, "unit": "cup" },
+      { "name": "olive oil", "quantity": 1, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "basil", "optional": true }
+    ],
+    "instructions": [
+      "Cook GF pasta per package directions",
+      "Heat sauce with olive oil and garlic",
+      "Drain pasta and toss with sauce",
+      "Top with parmesan and fresh basil"
+    ],
+    "tags": ["gluten-free", "vegetarian", "quick"]
+  },
+  {
+    "id": "13",
+    "title": "Shrimp Fried Rice",
+    "cuisine": "Asian",
+    "mealType": "dinner",
+    "timeMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "shrimp", "quantity": 1, "unit": "lb" },
+      { "name": "white rice", "quantity": 3, "unit": "cup", "optional": true },
+      { "name": "egg", "quantity": 2 },
+      { "name": "peas", "quantity": 1, "unit": "cup" },
+      { "name": "carrot", "quantity": 1 },
+      { "name": "tamari sauce", "quantity": 2, "unit": "tbsp" },
+      { "name": "vegetable oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" }
+    ],
+    "instructions": [
+      "Heat oil and cook shrimp until pink",
+      "Push aside, scramble eggs",
+      "Add rice, veggies, and tamari",
+      "Stir fry until heated through"
+    ],
+    "tags": ["gluten-free", "quick", "weeknight"]
+  },
+  {
+    "id": "14",
+    "title": "Caprese Salad",
+    "cuisine": "Italian",
+    "mealType": "lunch",
+    "timeMinutes": 10,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "tomato", "quantity": 3 },
+      { "name": "mozzarella cheese", "quantity": 8, "unit": "oz" },
+      { "name": "basil", "quantity": 0.5, "unit": "cup" },
+      { "name": "olive oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "balsamic vinegar", "quantity": 1, "unit": "tbsp" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Slice tomatoes and mozzarella",
+      "Arrange alternately on plate",
+      "Top with fresh basil",
+      "Drizzle with olive oil and vinegar",
+      "Season with salt and pepper"
+    ],
+    "tags": ["gluten-free", "vegetarian", "no-cook", "quick"]
+  },
+  {
+    "id": "15",
+    "title": "Tacos de Camarones",
+    "cuisine": "Mexican",
+    "mealType": "lunch",
+    "timeMinutes": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "shrimp", "quantity": 1, "unit": "lb" },
+      { "name": "corn tortillas", "quantity": 8 },
+      { "name": "lime juice", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 3, "unit": "clove" },
+      { "name": "cabbage", "quantity": 1, "unit": "cup" },
+      { "name": "cilantro", "quantity": 0.5, "unit": "cup" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Toss shrimp with lime, oil, and garlic",
+      "Sauté shrimp until pink",
+      "Warm tortillas",
+      "Fill with shrimp, cabbage, and cilantro"
+    ],
+    "tags": ["gluten-free", "seafood", "quick"]
+  },
+  {
+    "id": "16",
+    "title": "Lentil Soup",
+    "cuisine": "Middle Eastern",
+    "mealType": "lunch",
+    "timeMinutes": 50,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "red lentil", "quantity": 1.5, "unit": "cup" },
+      { "name": "vegetable broth", "quantity": 6, "unit": "cup" },
+      { "name": "onion", "quantity": 1 },
+      { "name": "carrot", "quantity": 2 },
+      { "name": "celery", "quantity": 1 },
+      { "name": "cumin", "quantity": 1, "unit": "tsp" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Heat oil and sauté onion, carrot, celery",
+      "Add lentils and broth",
+      "Bring to boil, then simmer 30 minutes",
+      "Add cumin",
+      "Season with salt"
+    ],
+    "tags": ["gluten-free", "vegetarian", "healthy"]
+  },
+  {
+    "id": "17",
+    "title": "Greek Salad",
+    "cuisine": "Greek",
+    "mealType": "lunch",
+    "timeMinutes": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "cucumber", "quantity": 1 },
+      { "name": "tomato", "quantity": 2 },
+      { "name": "red onion", "quantity": 0.5 },
+      { "name": "olives", "quantity": 1, "unit": "cup" },
+      { "name": "feta cheese", "quantity": 1, "unit": "cup" },
+      { "name": "olive oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "lemon juice", "quantity": 1, "unit": "tbsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Chop cucumber, tomato, and onion",
+      "Combine in bowl with olives",
+      "Top with crumbled feta",
+      "Drizzle with oil and lemon juice",
+      "Season with salt"
+    ],
+    "tags": ["gluten-free", "vegetarian", "no-cook"]
+  },
+  {
+    "id": "18",
+    "title": "Chicken Fried Rice",
+    "cuisine": "Asian",
+    "mealType": "dinner",
+    "timeMinutes": 30,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "chicken breast", "quantity": 1, "unit": "lb" },
+      { "name": "white rice", "quantity": 3, "unit": "cup" },
+      { "name": "egg", "quantity": 3 },
+      { "name": "peas", "quantity": 1, "unit": "cup" },
+      { "name": "carrot", "quantity": 1 },
+      { "name": "tamari sauce", "quantity": 2, "unit": "tbsp" },
+      { "name": "vegetable oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" }
+    ],
+    "instructions": [
+      "Cook diced chicken until done",
+      "Push aside, scramble eggs",
+      "Add rice and veggies",
+      "Season with tamari",
+      "Stir fry until heated"
+    ],
+    "tags": ["gluten-free", "quick", "weeknight"]
+  },
+  {
+    "id": "19",
+    "title": "Ham and Cheese Omelette",
+    "cuisine": "American",
+    "mealType": "breakfast",
+    "timeMinutes": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "egg", "quantity": 3 },
+      { "name": "ham", "quantity": 3, "unit": "oz" },
+      { "name": "cheese", "quantity": 0.5, "unit": "cup" },
+      { "name": "butter", "quantity": 1, "unit": "tbsp" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Whisk eggs with salt and pepper",
+      "Melt butter in skillet",
+      "Pour eggs and let set",
+      "Add ham and cheese to half",
+      "Fold and slide onto plate"
+    ],
+    "tags": ["gluten-free", "quick"]
+  },
+  {
+    "id": "20",
+    "title": "Vegetable Stir Fry",
+    "cuisine": "Asian",
+    "mealType": "dinner",
+    "timeMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "broccoli", "quantity": 4, "unit": "cup" },
+      { "name": "bell pepper", "quantity": 2 },
+      { "name": "carrot", "quantity": 2 },
+      { "name": "tamari sauce", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 3, "unit": "clove" },
+      { "name": "ginger", "quantity": 1, "unit": "tbsp" },
+      { "name": "vegetable oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "sesame oil", "quantity": 1, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Heat oil in wok or large skillet",
+      "Stir fry veggies for 5-7 minutes",
+      "Add garlic and ginger",
+      "Pour in tamari sauce",
+      "Drizzle with sesame oil"
+    ],
+    "tags": ["gluten-free", "vegetarian", "quick"]
+  },
+  {
+    "id": "21",
+    "title": "Roasted Chicken",
+    "cuisine": "American",
+    "mealType": "dinner",
+    "timeMinutes": 75,
+    "difficulty": "medium",
+    "ingredients": [
+      { "name": "whole chicken", "quantity": 1, "quantity": 4 },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "lemon", "quantity": 1 },
+      { "name": "garlic", "quantity": 4, "unit": "clove" },
+      { "name": "rosemary", "quantity": 2, "unit": "sprig" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Preheat oven to 450F",
+      "Pat chicken dry and season inside and out",
+      "Stuff with lemon, garlic, and rosemary",
+      "Roast for 1 hour and 15 minutes",
+      "Rest before serving"
+    ],
+    "tags": ["gluten-free", "classic"]
+  },
+  {
+    "id": "22",
+    "title": "Vegetable Omelette",
+    "cuisine": "American",
+    "mealType": "breakfast",
+    "timeMinutes": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "egg", "quantity": 2 },
+      { "name": "onion", "quantity": 0.25 },
+      { "name": "bell pepper", "quantity": 0.5 },
+      { "name": "mushroom", "quantity": 3, "unit": "oz" },
+      { "name": "butter", "quantity": 1, "unit": "tbsp" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Chop veggies finely",
+      "Whisk eggs with salt and pepper",
+      "Melt butter and sauté veggies briefly",
+      "Pour eggs over veggies",
+      "Fold when set"
+    ],
+    "tags": ["gluten-free", "vegetarian", "quick"]
+  },
+  {
+    "id": "23",
+    "title": "Bean Chili",
+    "cuisine": "American",
+    "mealType": "dinner",
+    "timeMinutes": 45,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "black bean", "quantity": 2, "unit": "can" },
+      { "name": "kidney bean", "quantity": 1, "unit": "can" },
+      { "name": "tomato sauce", "quantity": 2, "unit": "cup" },
+      { "name": "onion", "quantity": 1 },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "cumin", "quantity": 2, "unit": "tsp" },
+      { "name": "chili powder", "quantity": 1, "unit": "tbsp" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Heat oil and sauté onion and garlic",
+      "Add beans, tomato sauce, and spices",
+      "Simmer for 30-40 minutes",
+      "Stir occasionally",
+      "Serve hot"
+    ],
+    "tags": ["gluten-free", "vegetarian", "comfort-food"]
+  },
+  {
+    "id": "24",
+    "title": "Fish Tacos",
+    "cuisine": "Mexican",
+    "mealType": "lunch",
+    "timeMinutes": 30,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "cod fillet", "quantity": 1.5, "unit": "lb" },
+      { "name": "corn tortillas", "quantity": 8 },
+      { "name": "lime juice", "quantity": 2, "unit": "tbsp" },
+      { "name": "cabbage", "quantity": 2, "unit": "cup" },
+      { "name": "cilantro", "quantity": 0.5, "unit": "cup" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Brush fish with oil and lime",
+      "Pan fry or grill for 3-4 minutes per side",
+      "Warm tortillas",
+      "Fill with fish and cabbage slaw",
+      "Top with cilantro"
+    ],
+    "tags": ["gluten-free", "seafood", "quick"]
+  },
+  {
+    "id": "25",
+    "title": "Egg Fried Rice",
+    "cuisine": "Asian",
+    "mealType": "lunch",
+    "timeMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "egg", "quantity": 2 },
+      { "name": "white rice", "quantity": 3, "unit": "cup" },
+      { "name": "peas", "quantity": 1, "unit": "cup" },
+      { "name": "carrot", "quantity": 1 },
+      { "name": "tamari sauce", "quantity": 2, "unit": "tbsp" },
+      { "name": "vegetable oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" }
+    ],
+    "instructions": [
+      "Heat oil in wok",
+      "Scramble eggs, set aside",
+      "Stir fry rice and veggies",
+      "Add eggs back",
+      "Season with tamari"
+    ],
+    "tags": ["gluten-free", "vegetarian", "quick"]
+  },
+  {
+    "id": "26",
+    "title": "Baked Cod",
+    "cuisine": "American",
+    "mealType": "dinner",
+    "timeMinutes": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "cod fillet", "quantity": 1.5, "unit": "lb" },
+      { "name": "lemon", "quantity": 1 },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "parsley", "quantity": 0.5, "unit": "cup" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Preheat oven to 400F",
+      "Place cod on foil",
+      "Top with lemon, oil, garlic, and parsley",
+      "Bake for 12-15 minutes",
+      "Serve with pan sauce"
+    ],
+    "tags": ["gluten-free", "seafood", "quick"]
+  },
+  {
+    "id": "27",
+    "title": "Kale Salad",
+    "cuisine": "American",
+    "mealType": "lunch",
+    "timeMinutes": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "kale", "quantity": 5, "unit": "cup" },
+      { "name": "cherry tomato", "quantity": 1, "unit": "cup" },
+      { "name": "parmesan cheese", "quantity": 0.5, "unit": "cup" },
+      { "name": "olive oil", "quantity": 3, "unit": "tbsp" },
+      { "name": "lemon juice", "quantity": 1, "unit": "tbsp" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Massage kale with olive oil and salt",
+      "Let sit 5 minutes to soften",
+      "Add tomatoes and parmesan",
+      "Drizzle with lemon and oil",
+      "Toss and serve"
+    ],
+    "tags": ["gluten-free", "vegetarian", "healthy"]
+  },
+  {
+    "id": "28",
+    "title": "Turkey Meatballs",
+    "cuisine": "American",
+    "mealType": "dinner",
+    "timeMinutes": 35,
+    "difficulty": "medium",
+    "ingredients": [
+      { "name": "ground turkey", "quantity": 1.5, "unit": "lb" },
+      { "name": "egg", "quantity": 1 },
+      { "name": "garlic", "quantity": 2, "unit": "clove" },
+      { "name": "onion", "quantity": 0.25 },
+      { "name": "breadcrumb", "quantity": 0.5, "unit": "cup" },
+      { "name": "parmesan cheese", "quantity": 0.25, "unit": "cup" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Mix turkey, egg, garlic, onion, breadcrumbs, cheese",
+      "Form into balls",
+      "Bake at 400F for 20 minutes",
+      "Serve with marinara sauce"
+    ],
+    "tags": ["easy"]
+  },
+  {
+    "id": "29",
+    "title": "Garlic Butter Shrimp",
+    "cuisine": "American",
+    "mealType": "dinner",
+    "timeMinutes": 15,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "shrimp", "quantity": 1, "unit": "lb" },
+      { "name": "butter", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 4, "unit": "clove" },
+      { "name": "lemon juice", "quantity": 2, "unit": "tbsp" },
+      { "name": "parsley", "quantity": 0.25, "unit": "cup" },
+      { "name": "salt", "optional": true },
+      { "name": "pepper", "optional": true }
+    ],
+    "instructions": [
+      "Melt butter, add minced garlic",
+      "Cook 1 minute until fragrant",
+      "Add shrimp, cook until pink",
+      "Add lemon juice and parsley",
+      "Season with salt and pepper"
+    ],
+    "tags": ["gluten-free", "seafood", "quick", "weeknight"]
+  },
+  {
+    "id": "30",
+    "title": "Veggie Frittata",
+    "cuisine": "Italian",
+    "mealType": "breakfast",
+    "timeMinutes": 30,
+    "difficulty": "easy",
+    "ingredients": [
+      { "name": "egg", "quantity": 8 },
+      { "name": "spinach", "quantity": 2, "unit": "cup" },
+      { "name": "bell pepper", "quantity": 1 },
+      { "name": "onion", "quantity": 1 },
+      { "name": "cheese", "quantity": 1, "unit": "cup" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp" },
+      { "name": "salt", "optional": true }
+    ],
+    "instructions": [
+      "Preheat oven to 375F",
+      "Sauté veggies in oven-safe skillet",
+      "Whisk eggs with salt and pour over",
+      "Cook 2 minutes on stovetop",
+      "Top with cheese and bake 15-20 minutes"
+    ],
+    "tags": ["gluten-free", "vegetarian", "brunch"]
+  }
+]
