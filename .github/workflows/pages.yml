@@ -43,10 +43,22 @@ jobs:
       - name: Build web
         run: flutter build web --release --base-href /From-Fridge-to-Fork/ --verbose
         working-directory: flutter_app
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: flutter_app/build/web
+        - name: Build web (save logs)
+          run: |
+            set -o pipefail
+            flutter build web --release --base-href /From-Fridge-to-Fork/ --verbose 2>&1 | tee flutter_build.log
+          working-directory: flutter_app
+
+        - name: Upload Flutter build logs
+          uses: actions/upload-artifact@v4
+          with:
+            name: flutter-build-logs
+            path: flutter_app/flutter_build.log
+
+        - name: Upload GitHub Pages artifact
+          uses: actions/upload-pages-artifact@v4
+          with:
+            path: flutter_app/build/web
 
   deploy:
     runs-on: ubuntu-latest
