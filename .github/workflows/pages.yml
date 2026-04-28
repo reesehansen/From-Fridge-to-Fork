@@ -36,10 +36,13 @@ jobs:
         run: flutter pub get
         working-directory: flutter_app
 
-      - name: Build web
-        run: flutter build web --release --base-href /From-Fridge-to-Fork/
-        working-directory: flutter_app
 
+      - name: Check Flutter version
+        run: flutter --version
+
+      - name: Build web
+        run: flutter build web --release --base-href /From-Fridge-to-Fork/ --verbose
+        working-directory: flutter_app
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
