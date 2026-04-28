@@ -30,7 +30,9 @@ class FavoritesScreen extends StatelessWidget {
     final controller = AppScope.of(context).controller;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Favorites')),
+      appBar: AppBar(
+        title: const Text('Favorites'),
+      ),
       body: AppBackground(
         child: AnimatedBuilder(
           animation: controller,

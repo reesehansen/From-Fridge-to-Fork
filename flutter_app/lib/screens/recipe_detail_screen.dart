@@ -70,9 +70,22 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
   bool _matchesIngredient(RecipeIngredient ingredient, List<String> userIngredients) {
     final normalizedIngredient = _normalize(ingredient.name);
-    return userIngredients.any(
-      (userIngredient) => normalizedIngredient.contains(userIngredient) || userIngredient.contains(normalizedIngredient),
-    );
+    if (normalizedIngredient.isEmpty) {
+      return false;
+    }
+
+    return userIngredients.any((userIngredient) {
+      if (normalizedIngredient == userIngredient) {
+        return true;
+      }
+
+      final userWords = userIngredient.split(' ');
+      if (userWords.length == 1) {
+        return false;
+      }
+
+      return normalizedIngredient.contains(userIngredient);
+    });
   }
 
   Future<void> _toggleFavorite(RecipeDetail detail) async {
@@ -112,7 +125,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               );
             },
           ),
-          const SizedBox(width: 8),
         ],
       ),
       body: AppBackground(

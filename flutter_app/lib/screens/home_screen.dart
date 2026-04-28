@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../core/app_scope.dart';
 import '../core/navigation_args.dart';
 import '../widgets/app_background.dart';
+import '../widgets/app_logo.dart';
 import 'favorites_screen.dart';
 import 'results_screen.dart';
 
@@ -17,47 +18,140 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _ingredientsController = TextEditingController();
+  final TextEditingController _ingredientController = TextEditingController();
+  final FocusNode _ingredientFocusNode = FocusNode();
+  final List<String> _ingredients = <String>[];
+  bool _isUpdatingIngredientController = false;
+  String? _ingredientError;
   bool _glutenFreeOnly = true;
 
   @override
   void dispose() {
-    _ingredientsController.dispose();
+    _ingredientController.dispose();
+    _ingredientFocusNode.dispose();
     super.dispose();
   }
 
   void _searchRecipes() {
-    final ingredients = _ingredientsController.text.trim();
+    _commitIngredientInput(commitTrailingText: true);
+    if (_ingredients.isEmpty) {
+      setState(() => _ingredientError = 'Add at least one ingredient');
+      return;
+    }
+
     Navigator.of(context).pushNamed(
       ResultsScreen.routeName,
       arguments: SearchRouteArgs(
-        ingredientsCsv: ingredients,
+        ingredientsCsv: _ingredients.join(', '),
         glutenFreeOnly: _glutenFreeOnly,
       ),
     );
   }
 
+  void _handleIngredientChanged(String value) {
+    if (_isUpdatingIngredientController) {
+      return;
+    }
+
+    if (!value.contains(',')) {
+      if (_ingredientError != null) {
+        setState(() => _ingredientError = null);
+      }
+      return;
+    }
+
+    _commitIngredientInput(commitTrailingText: false);
+  }
+
+  void _commitIngredientInput({required bool commitTrailingText}) {
+    final rawText = _ingredientController.text;
+    final parts = rawText.split(',');
+    final partsToAdd = commitTrailingText ? parts : parts.take(parts.length - 1);
+    final additions = <String>[];
+
+    for (final part in partsToAdd) {
+      final ingredient = _normalizeIngredient(part);
+      if (ingredient.isEmpty) {
+        continue;
+      }
+
+      final exists = _ingredients.any((currentIngredient) => currentIngredient.toLowerCase() == ingredient.toLowerCase()) ||
+          additions.any((currentIngredient) => currentIngredient.toLowerCase() == ingredient.toLowerCase());
+      if (!exists) {
+        additions.add(ingredient);
+      }
+    }
+
+    final remainder = commitTrailingText ? '' : _normalizeIngredient(parts.last);
+
+    if (additions.isNotEmpty || _ingredientError != null) {
+      setState(() {
+        if (additions.isNotEmpty) {
+          _ingredients.addAll(additions);
+        }
+        _ingredientError = null;
+      });
+    }
+
+    if (rawText != remainder) {
+      _setIngredientText(remainder);
+    }
+  }
+
+  void _setIngredientText(String text) {
+    _isUpdatingIngredientController = true;
+    _ingredientController.value = TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
+    _isUpdatingIngredientController = false;
+  }
+
+  void _removeIngredient(String ingredient) {
+    setState(() {
+      _ingredients.removeWhere((currentIngredient) => currentIngredient.toLowerCase() == ingredient.toLowerCase());
+    });
+  }
+
+  void _clearIngredients() {
+    setState(() {
+      _ingredients.clear();
+      _ingredientError = null;
+    });
+    _setIngredientText('');
+  }
+
+  String _normalizeIngredient(String value) {
+    return value.trim().replaceAll(RegExp(r'\s+'), ' ');
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = AppScope.of(context).controller;
+    const bodyBlack = Color(0xFF101514);
 
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
             tooltip: 'Open favorites',
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints.tightFor(width: 40, height: 40),
+            visualDensity: VisualDensity.compact,
+            iconSize: 22,
             onPressed: () => Navigator.of(context).pushNamed(FavoritesScreen.routeName),
             icon: Stack(
               alignment: Alignment.center,
+              clipBehavior: Clip.none,
               children: <Widget>[
-                const Icon(Icons.favorite_border_rounded, size: 26),
+                const Icon(Icons.favorite_border_rounded, size: 22),
                 if (controller.hasFavorites)
                   Positioned(
-                    right: 2,
-                    top: 2,
+                    right: 1,
+                    top: 1,
                     child: Container(
-                      width: 8,
-                      height: 8,
+                      width: 7,
+                      height: 7,
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.error,
                         shape: BoxShape.circle,
@@ -67,58 +161,104 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          const SizedBox(width: 8),
         ],
       ),
       body: AppBackground(
         child: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+            padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
             children: <Widget>[
-              const SizedBox(height: 18),
+              const SizedBox(height: 12),
               Center(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
-                  child: Text(
-                    'From Fridge to Fork',
-                    maxLines: 1,
-                    softWrap: false,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.lilitaOne(
-                      fontSize: Theme.of(context).textTheme.displaySmall?.fontSize ?? 54,
-                      height: 0.98,
-                      letterSpacing: 0.4,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      const AppLogo(size: 58),
+                      const SizedBox(width: 12),
+                      Text.rich(
+                        TextSpan(
+                          style: GoogleFonts.lilitaOne(
+                            fontSize: Theme.of(context).textTheme.displayMedium?.fontSize ?? 68,
+                            height: 0.95,
+                            letterSpacing: 0.2,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                          children: const <TextSpan>[
+                            TextSpan(text: 'From Fridge to Fork'),
+                          ],
+                        ),
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
               Text(
-                'Type what is on hand, and we will rank the closest matches first so dinner starts faster.',
+                'Fridge ingredients in, fork-ready meals out. Add your ingredients and get dinner ideas fast!',
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: const Color(0xFF35564A),
-                      height: 1.45,
+                      color: bodyBlack,
+                      fontWeight: FontWeight.w400,
+                      height: 1.38,
                     ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 14),
               _SurfaceCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      'What is in the fridge?',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'Ingredients',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: bodyBlack,
+                              ),
+                        ),
+                        const Spacer(),
+                        if (_ingredients.isNotEmpty)
+                          TextButton.icon(
+                            onPressed: _clearIngredients,
+                            icon: const Icon(Icons.clear_all_rounded, size: 18),
+                            label: const Text('Clear all'),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                              visualDensity: VisualDensity.compact,
+                            ),
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 10),
+                    if (_ingredients.isNotEmpty)
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: _ingredients
+                            .map(
+                              (ingredient) => InputChip(
+                                label: Text(ingredient),
+                                onDeleted: () => _removeIngredient(ingredient),
+                                deleteIcon: const Icon(Icons.close_rounded, size: 18),
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    const SizedBox(height: 12),
                     TextField(
-                      controller: _ingredientsController,
-                      minLines: 3,
-                      maxLines: 5,
-                      textInputAction: TextInputAction.search,
-                      onSubmitted: (_) => _searchRecipes(),
+                      controller: _ingredientController,
+                      focusNode: _ingredientFocusNode,
+                      onChanged: _handleIngredientChanged,
+                      onSubmitted: (_) => _commitIngredientInput(commitTrailingText: true),
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                        hintText: 'Chicken, rice, garlic, lemon',
+                        hintText: 'Try: chicken, rice, garlic',
                         filled: true,
                         fillColor: const Color(0xFFF8F7F2),
                         border: OutlineInputBorder(
@@ -136,43 +276,68 @@ class _HomeScreenState extends State<HomeScreen> {
                         contentPadding: const EdgeInsets.all(16),
                       ),
                     ),
+                    if (_ingredientError != null) ...<Widget>[
+                      const SizedBox(height: 8),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.error_outline_rounded, size: 18, color: Theme.of(context).colorScheme.error),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              _ingredientError!,
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Theme.of(context).colorScheme.error,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                     const SizedBox(height: 14),
                     SwitchListTile.adaptive(
                       contentPadding: EdgeInsets.zero,
                       title: Text(
-                        'Best-effort gluten-free filter',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-                      ),
-                      subtitle: Text(
-                        'Keyword based only. Not medical advice.',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: const Color(0xFF5F7269)),
+                        'Gluten-free',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w800,
+                              color: bodyBlack,
+                            ),
                       ),
                       value: _glutenFreeOnly,
                       onChanged: (value) => setState(() => _glutenFreeOnly = value),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 8),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(Icons.info_outline_rounded, size: 18, color: Theme.of(context).colorScheme.primary),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            'Best-effort filter—always double-check ingredients.',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.38, color: bodyBlack),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton.icon(
                         onPressed: _searchRecipes,
                         icon: const Icon(Icons.search_rounded),
                         label: const Text('Find recipes'),
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size.fromHeight(54),
+                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                          textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              const _NoteCard(
-                icon: Icons.lock_outline_rounded,
-                title: 'Privacy note',
-                message: 'Favorites stay on this device only. No extra account or profile data is stored.',
-              ),
-              const SizedBox(height: 12),
-              const _NoteCard(
-                icon: Icons.info_outline_rounded,
-                title: 'Cooking note',
-                message: 'Gluten-free filtering is a best-effort keyword heuristic and should not be treated as medical advice.',
               ),
             ],
           ),
@@ -193,47 +358,6 @@ class _SurfaceCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: child,
-      ),
-    );
-  }
-}
-
-class _NoteCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String message;
-
-  const _NoteCard({required this.icon, required this.title, required this.message});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white.withOpacity(0.82),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(icon, color: Theme.of(context).colorScheme.primary),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    message,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.42),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

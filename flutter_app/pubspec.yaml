@@ -55,3 +55,5 @@ flutter:
   uses-material-design: true
 
   # To add assets or fonts later, extend this section.
+  assets:
+    - assets/fftf_logo.png

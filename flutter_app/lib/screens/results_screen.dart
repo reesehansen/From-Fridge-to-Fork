@@ -66,7 +66,6 @@ class _ResultsScreenState extends State<ResultsScreen> {
             onPressed: () => Navigator.of(context).pushNamed(FavoritesScreen.routeName),
             icon: const Icon(Icons.favorite_border_rounded),
           ),
-          const SizedBox(width: 8),
         ],
       ),
       body: AppBackground(
