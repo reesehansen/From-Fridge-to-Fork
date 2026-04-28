@@ -37,7 +37,7 @@ jobs:
         working-directory: flutter_app
 
       - name: Build web
-        run: flutter build web --release --base-href "${{ steps.pages.outputs.base_path }}"
+        run: flutter build web --release --base-href /From-Fridge-to-Fork/
         working-directory: flutter_app
 
       - name: Upload GitHub Pages artifact
