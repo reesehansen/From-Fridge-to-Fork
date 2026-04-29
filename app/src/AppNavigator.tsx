@@ -2,15 +2,17 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import WelcomeScreen from "./screens/WelcomeScreen";
 import IngredientInputScreen from "./screens/IngredientInputScreen";
 import ResultsScreen from "./screens/ResultsScreen";
 import RecipeDetailScreen from "./screens/RecipeDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
 
 export type RootStackParamList = {
+  Welcome: undefined;
   IngredientInput: undefined;
-  Results: { ingredients: string; isGlutenFree: boolean };
-  RecipeDetail: { id: string; name: string; userIngredients: string };
+  Results: { ingredients: string; isGlutenFree: boolean; starredIngredient?: string };
+  RecipeDetail: { id: string; name: string; userIngredients: string; starredIngredient?: string };
   Favorites: undefined;
 };
 
@@ -19,7 +21,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="IngredientInput">
+      <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="IngredientInput"
           component={IngredientInputScreen}

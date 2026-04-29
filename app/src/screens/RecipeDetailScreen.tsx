@@ -31,7 +31,7 @@ function splitUserIngredients(csv: string): string[] {
 }
 
 export default function RecipeDetailScreen({ route, navigation }: Props) {
-  const { id, userIngredients, name } = route.params;
+  const { id, userIngredients, name, starredIngredient } = route.params;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

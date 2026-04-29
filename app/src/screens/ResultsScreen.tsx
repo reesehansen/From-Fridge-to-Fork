@@ -14,6 +14,7 @@ import {
   searchMealsCloseMatch,
   getMealDetailById,
   isLikelyGlutenFree,
+  getMatchedIngredients,
 } from "../services/themealdb";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Results">;
@@ -24,10 +25,20 @@ type RankedMeal = {
   thumb?: string;
   matchCount: number;
   totalIngredients: number;
+  matchedIngredientList?: string[];
+  hasStarred?: boolean;
 };
 
+function normalize(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export default function ResultsScreen({ route, navigation }: Props) {
-  const { ingredients, isGlutenFree } = route.params;
+  const { ingredients, isGlutenFree, starredIngredient } = route.params;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +57,58 @@ export default function ResultsScreen({ route, navigation }: Props) {
 
         // 2) If GF toggle is OFF, show everything immediately
         if (!isGlutenFree) {
-          if (!cancelled) setMeals(ranked);
+          // Fetch details to get matched ingredients
+          const MAX_FETCH = 20;
+          const toFetch = ranked.slice(0, MAX_FETCH);
+
+          const mealsWithDetails = await Promise.all(
+            toFetch.map(async (m) => {
+              try {
+                const detail = await getMealDetailById(m.id);
+                const matched = getMatchedIngredients(ingredients, detail.ingredients);
+                const starredNorm = starredIngredient ? normalize(starredIngredient) : null;
+                const hasStarred = matched.some((ing) => normalize(ing) === starredNorm);
+
+                const matched = getMatchedIngredients(ingredients, detail.ingredients);
+                const starredNorm = starredIngredient ? normalize(starredIngredient) : null;
+                const hasStarred = matched.some((ing) => normalize(ing) === starredNorm);
+
+                return {
+                  meal: m,
+                  ok: isLikelyGlutenFree(detail),
+                  matchedIngredientList: matched,
+                  hasStarred: hasStarred && !!starredNorm,
+                };
+              } catch {
+                return { meal: m, ok: false };
+              }
+            })
+          );
+
+          const gfMeals = details
+            .filter((d) => d.ok)
+            .map((d) => ({
+              ...d.meal,
+              matchedIngredientList: d.matchedIngredientList,
+              hasStarred: d.hasStarred,
+            }))
+            .sort((a, b) => {
+              if (a.hasStarred && !b.hasStarred) return -1;
+              if (!a.hasStarred && b.hasStarred) return 1;
+              if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+              return a.name.localeCompare(b.name);
+            }
+            );
+
+          // Sort: starred first, then by matchCount
+          const sorted = mealsWithDetails.sort((a, b) => {
+            if (a.hasStarred && !b.hasStarred) return -1;
+            if (!a.hasStarred && b.hasStarred) return 1;
+            if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+            return a.name.localeCompare(b.name);
+          });
+
+          if (!cancelled) setMeals(sorted);
           return;
         }
 
@@ -80,7 +142,7 @@ export default function ResultsScreen({ route, navigation }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [ingredients, isGlutenFree]);
+  }, [ingredients, isGlutenFree, starredIngredient]);
 
   if (loading) {
     return (
@@ -128,6 +190,7 @@ export default function ResultsScreen({ route, navigation }: Props) {
                 id: item.id,
                 name: item.name,
                 userIngredients: ingredients,
+                starredIngredient,
               })
             }
             style={styles.card}
@@ -136,7 +199,7 @@ export default function ResultsScreen({ route, navigation }: Props) {
             <View style={{ flex: 1 }}>
               <Text style={styles.cardTitle}>{item.name}</Text>
               <Text style={styles.small}>
-                Matches {item.matchCount} of {item.totalIngredients} ingredients
+                Matches {item.matchCount} of {item.totalIngredients}: {item.matchedIngredientList?.join(", ") || "none"}
               </Text>
               <Text style={styles.small}>Tap to view “you have” vs “you need”</Text>
             </View>

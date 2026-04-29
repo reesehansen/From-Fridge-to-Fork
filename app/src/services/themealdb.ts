@@ -20,6 +20,45 @@ export type MealDetail = {
 const BASE = "https://www.themealdb.com/api/json/v1/1";
 
 /**
+ * Normalize a string for comparison (lowercase, remove special chars, trim).
+ */
+function normalize(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Get matched ingredients from user input that appear in the recipe.
+ * Returns an array of matched ingredient names from the user's list.
+ */
+export function getMatchedIngredients(
+  userIngredientsCsv: string,
+  recipeIngredients: { name: string; measure?: string }[]
+): string[] {
+  const userList = userIngredientsCsv
+    .split(",")
+    .map((s) => normalize(s))
+    .filter(Boolean);
+
+  const matched: string[] = [];
+
+  for (const userIng of userList) {
+    for (const recipeIng of recipeIngredients) {
+      const recipeIngNorm = normalize(recipeIng.name);
+      if (recipeIngNorm.includes(userIng)) {
+        matched.push(userIngredientsCsv.split(",").find((s) => normalize(s) === userIng) || userIng);
+        break;
+      }
+    }
+  }
+
+  return matched;
+}
+
+/**
  * Fetch meals that contain ONE ingredient (TheMealDB free endpoint supports single ingredient).
  */
 async function fetchMealsForSingleIngredient(ingredient: string): Promise<MealSummary[]> {

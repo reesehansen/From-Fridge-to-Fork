@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useState } from "react";
-import { View, Text, TextInput, Switch, Pressable, StyleSheet } from "react-native";
+import React, { useLayoutEffect, useState, useMemo } from "react";
+import { View, Text, TextInput, Switch, Pressable, StyleSheet, ScrollView, FlatList } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../AppNavigator";
 
@@ -8,6 +8,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "IngredientInput">;
 export default function IngredientInputScreen({ navigation }: Props) {
   const [ingredients, setIngredients] = useState("");
   const [isGlutenFree, setIsGlutenFree] = useState(true);
+  const [starredIngredient, setStarredIngredient] = useState<string | null>(null);
 
   // 💚 in the top-right header opens Favorites
   useLayoutEffect(() => {
@@ -23,12 +24,33 @@ export default function IngredientInputScreen({ navigation }: Props) {
     });
   }, [navigation]);
 
+  // Parse ingredients into an array
+  const ingredientList = useMemo(() => {
+    return ingredients
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+  }, [ingredients]);
+
+  // Toggle star on ingredient
+  const toggleStar = (ingredient: string) => {
+    if (starredIngredient === ingredient) {
+      setStarredIngredient(null);
+    } else {
+      setStarredIngredient(ingredient);
+    }
+  };
+
   const onFindRecipes = () => {
-    navigation.navigate("Results", { ingredients, isGlutenFree });
+    navigation.navigate("Results", {
+      ingredients,
+      isGlutenFree,
+      starredIngredient: starredIngredient || undefined,
+    });
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.headerBlock}>
         <Text style={styles.title}>From Fridge to Fork</Text>
         <Text style={styles.subtitle}>turn what you have into dinner 💚</Text>
@@ -46,6 +68,32 @@ export default function IngredientInputScreen({ navigation }: Props) {
           autoCapitalize="none"
         />
 
+        {/* Star instruction line */}
+        {ingredientList.length > 0 && (
+          <View>
+            <Text style={styles.instructionLabel}>Star the ingredient you're most ready to use.</Text>
+
+            {/* Ingredient chips with star icons */}
+            <View style={styles.chipContainer}>
+              {ingredientList.map((ingredient, idx) => (
+                <Pressable
+                  key={`${ingredient}-${idx}`}
+                  style={[
+                    styles.chip,
+                    starredIngredient === ingredient && styles.chipStarred,
+                  ]}
+                  onPress={() => toggleStar(ingredient)}
+                >
+                  <Text style={styles.chipText}>
+                    {starredIngredient === ingredient ? "⭐ " : "☆ "}
+                    {ingredient}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+        )}
+
         <View style={styles.row}>
           <Text style={styles.label}>Gluten-Free</Text>
           <Switch
@@ -62,7 +110,7 @@ export default function IngredientInputScreen({ navigation }: Props) {
 
         <Text style={styles.helper}>Tip: Try 2–4 ingredients for best results.</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -71,12 +119,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#6EE7B7", // lighter mint
     padding: 20,
-    justifyContent: "center",
   },
 
   headerBlock: {
     alignItems: "center",
     marginBottom: 14,
+    marginTop: 10,
   },
 
   title: {
@@ -101,12 +149,49 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 16,
     gap: 12,
+    marginBottom: 20,
   },
 
   label: {
     fontSize: 16,
     fontWeight: "800",
     color: "white",
+  },
+
+  instructionLabel: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "rgba(255,255,255,0.96)",
+    marginTop: 8,
+    marginBottom: 8,
+  },
+
+  chipContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginBottom: 8,
+  },
+
+  chip: {
+    backgroundColor: "rgba(255,255,255,0.2)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.4)",
+    borderRadius: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+
+  chipStarred: {
+    backgroundColor: "rgba(255,255,255,0.3)",
+    borderColor: "rgba(255,255,255,0.8)",
+    borderWidth: 2,
+  },
+
+  chipText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 14,
   },
 
   helper: {
@@ -148,4 +233,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "900",
   },
+});
+
 });
