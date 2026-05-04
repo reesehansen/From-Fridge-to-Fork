@@ -10,6 +10,7 @@ import 'screens/favorites_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/recipe_detail_screen.dart';
 import 'screens/results_screen.dart';
+import 'screens/welcome_screen.dart';
 import 'services/favorites_store.dart';
 import 'services/ranking_service.dart';
 import 'services/themealdb_service.dart';
@@ -107,9 +108,11 @@ class _FromFridgeToForkAppState extends State<FromFridgeToForkApp> {
                     ),
               ),
         ),
-        initialRoute: HomeScreen.routeName,
+        initialRoute: WelcomeScreen.routeName,
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case WelcomeScreen.routeName:
+              return MaterialPageRoute<void>(builder: (_) => const WelcomeScreen());
             case HomeScreen.routeName:
               return MaterialPageRoute<void>(builder: (_) => const HomeScreen());
             case ResultsScreen.routeName:

@@ -4,6 +4,7 @@ class RecipeSummary {
   final String? thumbnailUrl;
   final int matchCount;
   final int totalUserIngredients;
+  final List<String> matchedIngredients;
 
   const RecipeSummary({
     required this.id,
@@ -11,6 +12,7 @@ class RecipeSummary {
     required this.thumbnailUrl,
     required this.matchCount,
     required this.totalUserIngredients,
+    this.matchedIngredients = const <String>[],
   });
 
   double get matchRatio {
@@ -26,6 +28,7 @@ class RecipeSummary {
     String? thumbnailUrl,
     int? matchCount,
     int? totalUserIngredients,
+    List<String>? matchedIngredients,
   }) {
     return RecipeSummary(
       id: id ?? this.id,
@@ -33,6 +36,7 @@ class RecipeSummary {
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
       matchCount: matchCount ?? this.matchCount,
       totalUserIngredients: totalUserIngredients ?? this.totalUserIngredients,
+      matchedIngredients: matchedIngredients ?? this.matchedIngredients,
     );
   }
 }

@@ -38,6 +38,7 @@ class ThemealdbService {
               thumbnailUrl: _clean(meal['strMealThumb']),
               matchCount: 0,
               totalUserIngredients: 0,
+              matchedIngredients: const <String>[],
             ),
           )
           .where((summary) => summary.id.isNotEmpty && summary.name.isNotEmpty)

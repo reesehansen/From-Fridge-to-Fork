@@ -36,7 +36,9 @@ class RecipeCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     if (showMatches)
                       Text(
-                        'Matches ${recipe.matchCount} of ${recipe.totalUserIngredients}',
+                        recipe.matchedIngredients.isEmpty
+                            ? 'Matches ${recipe.matchCount} of ${recipe.totalUserIngredients}: none'
+                            : 'Matches ${recipe.matchCount} of ${recipe.totalUserIngredients}: ${recipe.matchedIngredients.join(', ')}',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: const Color(0xFF35564A),
                               fontWeight: FontWeight.w700,

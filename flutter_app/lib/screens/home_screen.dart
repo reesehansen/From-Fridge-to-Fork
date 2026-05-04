@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _ingredientController = TextEditingController();
   final FocusNode _ingredientFocusNode = FocusNode();
   final List<String> _ingredients = <String>[];
+  String? _mustUseIngredient;
   bool _isUpdatingIngredientController = false;
   String? _ingredientError;
   bool _glutenFreeOnly = true;
@@ -44,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       arguments: SearchRouteArgs(
         ingredientsCsv: _ingredients.join(', '),
         glutenFreeOnly: _glutenFreeOnly,
+        mustUseIngredient: _mustUseIngredient,
       ),
     );
   }
@@ -110,6 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _removeIngredient(String ingredient) {
     setState(() {
       _ingredients.removeWhere((currentIngredient) => currentIngredient.toLowerCase() == ingredient.toLowerCase());
+      if (_mustUseIngredient?.toLowerCase() == ingredient.toLowerCase()) {
+        _mustUseIngredient = null;
+      }
     });
   }
 
@@ -133,32 +138,36 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          IconButton(
-            tooltip: 'Open favorites',
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints.tightFor(width: 40, height: 40),
-            visualDensity: VisualDensity.compact,
-            iconSize: 22,
-            onPressed: () => Navigator.of(context).pushNamed(FavoritesScreen.routeName),
-            icon: Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: <Widget>[
-                const Icon(Icons.favorite_border_rounded, size: 22),
-                if (controller.hasFavorites)
-                  Positioned(
-                    right: 1,
-                    top: 1,
-                    child: Container(
-                      width: 7,
-                      height: 7,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.error,
-                        shape: BoxShape.circle,
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: TextButton.icon(
+              onPressed: () => Navigator.of(context).pushNamed(FavoritesScreen.routeName),
+              icon: Stack(
+                alignment: Alignment.center,
+                clipBehavior: Clip.none,
+                children: <Widget>[
+                  const Icon(Icons.favorite_border_rounded, size: 22),
+                  if (controller.hasFavorites)
+                    Positioned(
+                      right: 1,
+                      top: 1,
+                      child: Container(
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.error,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
+              label: const Text('My Favorites'),
+              style: TextButton.styleFrom(
+                foregroundColor: bodyBlack,
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                textStyle: const TextStyle(fontWeight: FontWeight.w700),
+              ),
             ),
           ),
         ],
@@ -222,6 +231,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                         ),
                         const Spacer(),
+                        // Dropdown pinned to the far right.
+                        SizedBox(
+                          width: 180,
+                          child: DropdownButtonFormField<String?>(
+                            value: _mustUseIngredient,
+                            isExpanded: true,
+                            items: <DropdownMenuItem<String?>>[
+                              const DropdownMenuItem<String?>(value: null, child: Text('None')),
+                            ]
+                                .followedBy(_ingredients.map((ing) => DropdownMenuItem<String?>(value: ing, child: Text(ing))))
+                                .toList(),
+                            onChanged: (value) {
+                              setState(() => _mustUseIngredient = value);
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Must use now (optional)',
+                              isDense: true,
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                          ),
+                        ),
                         if (_ingredients.isNotEmpty)
                           TextButton.icon(
                             onPressed: _clearIngredients,
@@ -230,6 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                               visualDensity: VisualDensity.compact,
+                              foregroundColor: bodyBlack,
                             ),
                           ),
                       ],

@@ -1,8 +1,9 @@
 class SearchRouteArgs {
   final String ingredientsCsv;
   final bool glutenFreeOnly;
+  final String? mustUseIngredient;
 
-  const SearchRouteArgs({required this.ingredientsCsv, required this.glutenFreeOnly});
+  const SearchRouteArgs({required this.ingredientsCsv, required this.glutenFreeOnly, this.mustUseIngredient});
 }
 
 class RecipeDetailRouteArgs {

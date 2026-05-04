@@ -21,6 +21,7 @@ class RankingService {
   Future<RankedSearchResult> searchRecipes(
     String ingredientsCsv, {
     required bool glutenFreeOnly,
+    String? mustUseIngredient,
     int candidateCap = 30,
     int glutenFreeCheckCap = 12,
   }) async {
@@ -50,15 +51,26 @@ class RankingService {
       }
     }
 
+    final mustUseNormalized = mustUseIngredient?.trim().toLowerCase();
+
     final ranked = merged.values
-        .map(
-          (candidate) => candidate.recipe.copyWith(
+        .map((candidate) {
+          final hasMustUse = mustUseNormalized != null && candidate.matchedIngredients.contains(mustUseNormalized);
+          return candidate.recipe.copyWith(
             matchCount: candidate.matchCount,
             totalUserIngredients: normalizedIngredients.length,
-          ),
-        )
-        .toList(growable: false)
-      ..sort(_compareSummaries);
+            matchedIngredients: candidate.matchedIngredients.toList(growable: false),
+          );
+        })
+        .toList(growable: false);
+    ranked.sort((a, b) {
+      final aHasMust = mustUseNormalized != null && a.matchedIngredients.contains(mustUseNormalized);
+      final bHasMust = mustUseNormalized != null && b.matchedIngredients.contains(mustUseNormalized);
+      if (aHasMust != bHasMust) {
+        return aHasMust ? -1 : 1;
+      }
+      return _compareSummaries(a, b);
+    });
 
     final limited = ranked.take(candidateCap).toList(growable: false);
 

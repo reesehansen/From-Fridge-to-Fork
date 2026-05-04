@@ -40,6 +40,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
     final result = await scope.rankingService.searchRecipes(
       widget.args.ingredientsCsv,
       glutenFreeOnly: widget.args.glutenFreeOnly,
+      mustUseIngredient: widget.args.mustUseIngredient,
     );
     return _ResultsData(result: result);
   }
