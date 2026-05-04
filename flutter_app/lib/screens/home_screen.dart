@@ -231,30 +231,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                         ),
                         const Spacer(),
-                        // Dropdown pinned to the far right.
-                        SizedBox(
-                          width: 180,
-                          child: DropdownButtonFormField<String?>(
-                            value: _mustUseIngredient,
-                            isExpanded: true,
-                            items: <DropdownMenuItem<String?>>[
-                              const DropdownMenuItem<String?>(value: null, child: Text('None')),
-                            ]
-                                .followedBy(_ingredients.map((ing) => DropdownMenuItem<String?>(value: ing, child: Text(ing))))
-                                .toList(),
-                            onChanged: (value) {
-                              setState(() => _mustUseIngredient = value);
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'Must use now (optional)',
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                            ),
-                          ),
-                        ),
                         if (_ingredients.isNotEmpty)
                           TextButton.icon(
                             onPressed: _clearIngredients,
@@ -308,6 +284,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.5),
                         ),
                         contentPadding: const EdgeInsets.all(16),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    DropdownButtonFormField<String?>(
+                      value: _mustUseIngredient,
+                      isExpanded: true,
+                      items: <DropdownMenuItem<String?>>[
+                        const DropdownMenuItem<String?>(value: null, child: Text('None')),
+                      ]
+                          .followedBy(_ingredients.map((ing) => DropdownMenuItem<String?>(value: ing, child: Text(ing))))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() => _mustUseIngredient = value);
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Must use now (optional)',
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                       ),
                     ),
                     if (_ingredientError != null) ...<Widget>[
