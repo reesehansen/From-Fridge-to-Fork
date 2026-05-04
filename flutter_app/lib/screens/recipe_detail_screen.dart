@@ -224,7 +224,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                           child: OutlinedButton.icon(
                             onPressed: () => _openExternalLink(detail.youtubeUrl!),
                             icon: const Icon(Icons.play_circle_outline_rounded),
-                            label: const Text('Watch video'),
+                            label: const Text('Open video'),
                           ),
                         ),
                     ],
