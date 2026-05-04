@@ -79,7 +79,7 @@ class _FromFridgeToForkAppState extends State<FromFridgeToForkApp> {
             backgroundColor: Colors.transparent,
             foregroundColor: Color(0xFF16392E),
           ),
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             color: Colors.white,
             elevation: 0,
             surfaceTintColor: Colors.white,

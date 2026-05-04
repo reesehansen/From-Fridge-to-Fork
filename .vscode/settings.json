@@ -5,8 +5,8 @@
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.dart": true,
-      "source.organizeImports.dart": true
+      "source.fixAll.dart": "explicit",
+      "source.organizeImports.dart": "explicit"
     }
   },
   "search.exclude": {
