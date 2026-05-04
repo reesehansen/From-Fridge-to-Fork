@@ -145,6 +145,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               }
 
               final detail = snapshot.data!;
+              final sourceUrl = detail.sourceUrl?.trim();
+              final youtubeUrl = detail.youtubeUrl?.trim();
+              final hasSourceUrl = sourceUrl != null && sourceUrl.isNotEmpty;
+              final hasYoutubeUrl = youtubeUrl != null && youtubeUrl.isNotEmpty;
+              const bodyBlack = Color(0xFF101514);
               final userIngredients = _parseIngredients(widget.args.userIngredientsCsv);
               final have = <RecipeIngredient>[];
               final need = <RecipeIngredient>[];
@@ -210,26 +215,28 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   const SizedBox(height: 14),
                   Row(
                     children: <Widget>[
-                      if (detail.sourceUrl != null)
+                      if (hasSourceUrl)
                         Expanded(
                           child: FilledButton.icon(
-                            onPressed: () => _openExternalLink(detail.sourceUrl!),
+                            style: FilledButton.styleFrom(foregroundColor: bodyBlack),
+                            onPressed: () => _openExternalLink(sourceUrl!),
                             icon: const Icon(Icons.open_in_new_rounded),
                             label: const Text('Open source'),
                           ),
                         ),
-                      if (detail.sourceUrl != null && detail.youtubeUrl != null) const SizedBox(width: 12),
-                      if (detail.youtubeUrl != null)
+                      if (hasSourceUrl && hasYoutubeUrl) const SizedBox(width: 12),
+                      if (hasYoutubeUrl)
                         Expanded(
                           child: OutlinedButton.icon(
-                            onPressed: () => _openExternalLink(detail.youtubeUrl!),
+                            style: OutlinedButton.styleFrom(foregroundColor: bodyBlack),
+                            onPressed: () => _openExternalLink(youtubeUrl!),
                             icon: const Icon(Icons.play_circle_outline_rounded),
                             label: const Text('Open video'),
                           ),
                         ),
                     ],
                   ),
-                  if (detail.sourceUrl == null && detail.youtubeUrl == null) ...<Widget>[
+                  if (!hasSourceUrl && !hasYoutubeUrl) ...<Widget>[
                     const SizedBox(height: 12),
                     Text(
                       'No external links were provided for this recipe.',
