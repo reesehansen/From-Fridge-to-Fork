@@ -1,0 +1,17 @@
+{
+  "dart.flutterSdkPath": "${workspaceFolder}/../../development/flutter",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "Dart-Code.dart-code",
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.dart": true,
+      "source.organizeImports.dart": true
+    }
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/.dart_tool": true,
+    "**/node_modules": true
+  }
+}
